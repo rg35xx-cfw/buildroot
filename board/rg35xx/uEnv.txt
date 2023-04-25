@@ -1,0 +1,8 @@
+# no ramdisk, direct root into mmcblk0p2
+#ramdisk_addr_r=-
+#bootargs=clk_ignore_unused root=/dev/mmcblk0p2
+
+# Ramdisk boot (ramdisk.img)
+# verbose log enabled
+uenvcmd=setenv os_type linux;
+bootargs=earlyprintk clk_ignore_unused selinux=0 init=/init  

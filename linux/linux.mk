@@ -153,10 +153,15 @@ LINUX_MAKE_FLAGS = \
 	HOSTCC="$(HOSTCC) $(subst -I/,-isystem /,$(subst -I /,-isystem /,$(HOST_CFLAGS))) $(HOST_LDFLAGS)" \
 	ARCH=$(KERNEL_ARCH) \
 	INSTALL_MOD_PATH=$(TARGET_DIR) \
-	CROSS_COMPILE="$(TARGET_CROSS)" \
 	WERROR=0 \
 	REGENERATE_PARSERS=1 \
 	DEPMOD=$(HOST_DIR)/sbin/depmod
+
+ifeq ($(BR2_KERNEL_LEGACY_3_10), y)
+	LINUX_MAKE_FLAGS += CROSS_COMPILE=$(HOST_DIR)/lib/gcc-linaro-arm-linux-gnueabi/bin/arm-linux-gnueabi-
+else
+	LINUX_MAKE_FLAGS += CROSS_COMPILE="$(TARGET_CROSS)"
+endif
 
 ifeq ($(BR2_REPRODUCIBLE),y)
 LINUX_MAKE_ENV += \
