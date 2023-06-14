@@ -1,0 +1,227 @@
+{
+  "version": "1.5",
+  "default_core_path": "",
+  "default_core_name": "",
+  "label_display_mode": 0,
+  "right_thumbnail_mode": 0,
+  "left_thumbnail_mode": 0,
+  "sort_mode": 2,
+  "items": [
+    {
+      "path": "/userdata/roms/psp/Virtua Tennis 3 (USA) (En,Ja,Fr,De,Es,It) (v1.02).iso",
+      "label": "",
+      "core_path": "/userdata/cores/ppsspp_libretro.so",
+      "core_name": "PPSSPP",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/psx/Arkanoid Returns.PBP",
+      "label": "",
+      "core_path": "/userdata/cores/pcsx_rearmed_libretro.so",
+      "core_name": "PCSX-ReARMed",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/nes/2048 (tsone).nes",
+      "label": "",
+      "core_path": "/userdata/cores/fceumm_libretro.so",
+      "core_name": "FCEUmm",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/atari2600/Millipede (USA).zip",
+      "label": "",
+      "core_path": "/userdata/cores/stella_libretro.so",
+      "core_name": "Stella",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/megadrive/Old-Towers.bin",
+      "label": "",
+      "core_path": "/userdata/cores/picodrive_libretro.so",
+      "core_name": "PicoDrive",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/sengoku.zip",
+      "label": "",
+      "core_path": "/userdata/cores/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/neocup98.zip",
+      "label": "",
+      "core_path": "/userdata/cores/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/neocup98.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/megadrive/Old-Towers.bin",
+      "label": "",
+      "core_path": "/usr/lib/libretro/picodrive_libretro.so",
+      "core_name": "PicoDrive",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/atari2600/Marble Craze (USA) (Unl).zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/stella2014_libretro.so",
+      "core_name": "Stella 2014",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/ssideki2.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/ssideki3.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/nes/2048 (tsone).nes",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fceumm_libretro.so",
+      "core_name": "FCEUmm",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/whp.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/lastblad.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/atari2600/Mr. Postman (Europe).zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/stella2014_libretro.so",
+      "core_name": "Stella 2014",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/neomrdo.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/nam1975.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/neogeo/tophuntr.zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/fbneo_libretro.so",
+      "core_name": "FinalBurn Neo",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/atari2600/Pac-Man (Ebivision) (France) (Unl).zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/stella2014_libretro.so",
+      "core_name": "Stella 2014",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/atari2600/Front Line (USA).zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/stella2014_libretro.so",
+      "core_name": "Stella 2014",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/atari2600/Centipede (USA).zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/stella2014_libretro.so",
+      "core_name": "Stella 2014",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/gbc/Marble Madness (USA, Europe).zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/gambatte_libretro.so",
+      "core_name": "Gambatte",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/psp/Virtua Tennis 3 (USA) (En,Ja,Fr,De,Es,It) (v1.02).iso",
+      "label": "",
+      "core_path": "/usr/lib/libretro/ppsspp_libretro.so",
+      "core_name": "PPSSPP",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/gba/Mario Kart - Super Circuit.gba",
+      "label": "",
+      "core_path": "/usr/lib/libretro/mgba_libretro.so",
+      "core_name": "mGBA",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/gbc/Tetris DX (JU) [C][T+Spa100%_PalKnights].zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/gambatte_libretro.so",
+      "core_name": "Gambatte",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "/userdata/roms/gbc/Tetris DX (JU) [C][T+Spa100%_PalKnights].zip",
+      "label": "",
+      "core_path": "/usr/lib/libretro/mgba_libretro.so",
+      "core_name": "mGBA",
+      "crc32": "",
+      "db_name": ""
+    }
+  ]
+}

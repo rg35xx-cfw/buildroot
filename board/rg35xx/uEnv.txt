@@ -1,0 +1,3 @@
+# no ramdisk
+ramdisk_addr_r=-
+bootargs=console=ttyOWL2,115200 rw root=/dev/mmcblk0p2 rootwait clk_ignore_unused init=/sbin/init

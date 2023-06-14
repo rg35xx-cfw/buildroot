@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "Enabling swap..."
+
+mkswap /dev/mmcblk0p2
+swapon /dev/mmcblk0p2
+
+echo 100 > /proc/sys/vm/swappiness
+
+

@@ -1,0 +1,74 @@
+From 6108d19e7a1cb79015261828d7fe6d442f57c285 Mon Sep 17 00:00:00 2001
+From: JohnnyonFlame <johnnyonflame@hotmail.com>
+Date: Sat, 10 Jun 2023 18:25:25 -0300
+Subject: [PATCH] video/fbcon: Unlock stale graphics ttys.
+
+Previously you could get cases where the TTY wasn't released properly, causing the application to wait for it to become active forever.
+
+This works around the problem by forcing SDL1.2 to unlock the VTs beforehand.
+---
+ src/video/fbcon/SDL_fbvideo.c | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+diff --git a/src/video/fbcon/SDL_fbvideo.c b/src/video/fbcon/SDL_fbvideo.c
+index 2c45c365..92f05236 100644
+--- a/src/video/fbcon/SDL_fbvideo.c
++++ b/src/video/fbcon/SDL_fbvideo.c
+@@ -29,6 +29,9 @@
+ #include <unistd.h>
+ #include <sys/ioctl.h>
+ #include <sys/mman.h>
++#include <linux/fb.h>
++#include <linux/kd.h>
++#include <linux/vt.h>
+ 
+ #ifndef HAVE_GETPAGESIZE
+ #include <asm/page.h>		/* For definition of PAGE_SIZE */
+@@ -511,12 +514,44 @@ static int FB_VideoInit(_THIS, SDL_PixelFormat *vformat)
+ 	const char *SDL_fbdev;
+ 	const char *rotation;
+ 	FILE *modesdb;
++	char tty[10];
++	int fd;
+ 
+ 	/* Initialize the library */
+ 	SDL_fbdev = SDL_getenv("SDL_FBDEV");
+ 	if ( SDL_fbdev == NULL ) {
+ 		SDL_fbdev = "/dev/fb0";
+ 	}
++
++	/*
++	 * Check if we have a stale graphics tty, if we do, we will try to unlock it
++	 * so that the application doesn't get stuck waiting for it to become active
++	 * when it's never going to be, since that would cause a deadlock.
++	 */
++	for (i=0; i < 10; i++) {
++		int mode;
++
++		sprintf(tty, "/dev/tty%i", i);
++		fd = open(tty, O_RDWR);
++		if (fd < 0)
++			continue;
++
++		if (ioctl(fd, KDGETMODE, &mode) < 0 || mode == KD_TEXT) {
++			close(fd);
++			fd = -1;
++		}
++		else if (mode != KD_TEXT) {
++			if (ioctl(fd, KDSETMODE, KD_TEXT) < 0)
++				fprintf(stderr, "Unable to set keyboard mode.\n");
++
++			if (ioctl(fd, VT_UNLOCKSWITCH, 1) < 0)
++				fprintf(stderr, "Unable to unlock terminal.\n");
++
++			close(fd);
++			break;
++		}
++	}
++
+ 	console_fd = open(SDL_fbdev, O_RDWR, 0);
+ 	if ( console_fd < 0 ) {
+ 		SDL_SetError("Unable to open %s", SDL_fbdev);
+-- 
+2.20.1
+

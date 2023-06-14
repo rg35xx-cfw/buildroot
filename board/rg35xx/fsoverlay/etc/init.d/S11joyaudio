@@ -1,0 +1,6 @@
+#!/bin/sh
+
+insmod /lib/modules/3.10.37/kernel/drivers/input/joydev.ko
+
+joyaudio & 
+

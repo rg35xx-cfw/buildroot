@@ -1,0 +1,19 @@
+{
+  "version": "1.5",
+  "default_core_path": "",
+  "default_core_name": "",
+  "label_display_mode": 0,
+  "right_thumbnail_mode": 0,
+  "left_thumbnail_mode": 0,
+  "sort_mode": 0,
+  "items": [
+    {
+      "path": "/userdata/roms/megadrive/Old-Towers.bin",
+      "label": "Old-Towers",
+      "core_path": "/usr/lib/libretro/picodrive_libretro.so",
+      "core_name": "PicoDrive",
+      "crc32": "",
+      "db_name": ""
+    }
+  ]
+}

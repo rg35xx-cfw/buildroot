@@ -1,0 +1,11 @@
+--- a/core/deps/libchdr/deps/lzma-22.01/src/CpuArch.c	2023-06-02 22:19:35.000000000 +0000
++++ b/core/deps/libchdr/deps/lzma-22.01/src/CpuArch.c	2023-06-14 19:27:57.912035471 +0000
+@@ -427,7 +427,7 @@
+ 
+ #include <sys/auxv.h>
+ 
+-#define USE_HWCAP
++//#define USE_HWCAP
+ 
+ #ifdef USE_HWCAP
+ 
