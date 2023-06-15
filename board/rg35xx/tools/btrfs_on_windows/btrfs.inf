@@ -1,0 +1,135 @@
+;;;
+;;; WinBtrfs
+;;;
+;;;
+;;; Copyright (c) 2016-23 Mark Harmstone
+;;;
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = Volume
+ClassGuid   = {71a27cdd-812a-11d0-bec7-08002be2092f}
+Provider    = %Me%
+DriverVer   = 01/10/2023,1.8.2.0
+CatalogFile = btrfs.cat
+
+[DestinationDirs]
+Btrfs.DriverFiles       = 12            ;%windir%\system32\drivers
+Btrfs.DllFiles          = 11            ;%windir%\system32
+
+;;
+;; Default install sections
+;;
+
+[DefaultInstall.NTamd64]
+OptionDesc  = %ServiceDescription%
+CopyFiles   = Btrfs.DriverFiles,Btrfs.DllFiles
+AddReg      = shellbtrfs_AddReg
+CopyINF     = btrfs-vol.inf
+
+[DefaultInstall.NTx86]
+OptionDesc  = %ServiceDescription%
+CopyFiles   = Btrfs.DriverFiles,Btrfs.DllFiles
+AddReg      = shellbtrfs_AddReg
+CopyINF     = btrfs-vol.inf
+
+[DefaultInstall.NTarm]
+OptionDesc  = %ServiceDescription%
+CopyFiles   = Btrfs.DriverFiles,Btrfs.DllFiles
+AddReg      = shellbtrfs_AddReg
+CopyINF     = btrfs-vol.inf
+
+[DefaultInstall.NTarm64]
+OptionDesc  = %ServiceDescription%
+CopyFiles   = Btrfs.DriverFiles,Btrfs.DllFiles
+AddReg      = shellbtrfs_AddReg
+CopyINF     = btrfs-vol.inf
+
+[DefaultInstall.NTamd64.Services]
+AddService  = %ServiceName%,0x802,Btrfs.Service
+
+[DefaultInstall.NTx86.Services]
+AddService  = %ServiceName%,0x802,Btrfs.Service
+
+[DefaultInstall.NTarm.Services]
+AddService  = %ServiceName%,0x802,Btrfs.Service
+
+[DefaultInstall.NTarm64.Services]
+AddService  = %ServiceName%,0x802,Btrfs.Service
+
+;
+; Services Section
+;
+
+[Btrfs.Service]
+DisplayName      = %ServiceName%
+Description      = %ServiceDescription%
+ServiceBinary    = %12%\%DriverName%.sys    ;%windir%\system32\drivers\
+ServiceType      = 1
+StartType        = 1                        ;SERVICE_SYSTEM_START
+ErrorControl     = 1
+LoadOrderGroup   = "File System"
+
+;
+; Copy Files
+;
+
+[Btrfs.DriverFiles]
+%DriverName%.sys
+
+[Btrfs.DllFiles]
+shellbtrfs.dll
+ubtrfs.dll
+mkbtrfs.exe
+
+[SourceDisksFiles]
+btrfs.sys = 1,,
+shellbtrfs.dll = 1,,
+ubtrfs.dll = 1,,
+mkbtrfs.exe = 1,,
+
+[SourceDisksNames.x86]
+1 = %DiskId1%,,,\x86
+
+[SourceDisksNames.amd64]
+1 = %DiskId1%,,,\x64
+
+[SourceDisksNames.arm]
+1 = %DiskId1%,,,\arm
+
+[SourceDisksNames.arm64]
+1 = %DiskId1%,,,\aarch64
+
+[shellbtrfs_AddReg]
+HKCR,*\ShellEx\PropertySheetHandlers\WinBtrfs,,,"{2690B74F-F353-422D-BB12-401581EEF8F2}"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F0},,,"WinBtrfs shell extension (icon handler)"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F0}\InprocServer32,,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\shellbtrfs.dll"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F0}\InprocServer32,ThreadingModel,,"Apartment"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F1},,,"WinBtrfs shell extension (context menu)"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F1}\InprocServer32,,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\shellbtrfs.dll"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F1}\InprocServer32,ThreadingModel,,"Apartment"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F2},,,"WinBtrfs shell extension (property sheet)"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F2}\InprocServer32,,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\shellbtrfs.dll"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F2}\InprocServer32,ThreadingModel,,"Apartment"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F3},,,"WinBtrfs shell extension (volume property sheet)"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F3}\InprocServer32,,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\shellbtrfs.dll"
+HKCR,CLSID\{2690B74F-F353-422D-BB12-401581EEF8F3}\InprocServer32,ThreadingModel,,"Apartment"
+HKCR,Directory\Background\ShellEx\ContextMenuHandlers\WinBtrfs,,,"{2690B74F-F353-422D-BB12-401581EEF8F1}"
+HKCR,Drive\ShellEx\PropertySheetHandlers\WinBtrfs,,,"{2690B74F-F353-422D-BB12-401581EEF8F3}"
+HKCR,Folder\ShellEx\ContextMenuHandlers\WinBtrfs,,,"{2690B74F-F353-422D-BB12-401581EEF8F1}"
+HKCR,Folder\ShellEx\PropertySheetHandlers\WinBtrfs,,,"{2690B74F-F353-422D-BB12-401581EEF8F2}"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\WinBtrfs,,,"{2690B74F-F353-422D-BB12-401581EEF8F0}"
+
+;;
+;; String Section
+;;
+
+[Strings]
+Me                      = "Mark Harmstone"
+ServiceDescription      = "Btrfs driver"
+ServiceName             = "btrfs"
+DriverName              = "btrfs"
+DiskId1                 = "Btrfs Device Installation Disk"
+VolumeName              = "Btrfs volume"
+ControllerName          = "Btrfs controller"
+REG_EXPAND_SZ           = 0x00020000
