@@ -44,6 +44,12 @@ fi
 # Populate retroarch and flycast configs
 if [ ! -d "/userdata/system/.config" ]; then
 	cp -r /usr/share/simplemenu/.config /userdata/system/
+	cp -r /usr/share/flycast /userdata/system/.config/
+fi
+
+if [ ! -d "/userdata/system/configs" ]; then
+	mkdir -p /userdata/system/configs
+	cp -r /usr/share/configs /userdata/system/
 fi
 
 # Add roms folders if missing
