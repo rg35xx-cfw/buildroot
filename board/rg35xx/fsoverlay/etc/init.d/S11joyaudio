@@ -2,5 +2,10 @@
 
 insmod /lib/modules/3.10.37/kernel/drivers/input/joydev.ko
 
+# Detect/switch hdmi audio routing
+hdmi_audio_switch.sh
+
+keypower &
+
 joyaudio & 
 

@@ -1,0 +1,11 @@
+#!/bin/sh 
+
+export SDL_VSYNC=1 SDL_RENDER_DRIVER=opengles2 
+export SDL_GAMECONTROLLERCONFIG=$(grep "RG35XX" "${HOME}/.config/gamecontrollerdb.txt")
+
+cd /usr/share/daphne
+
+export GAMENAME=`basename ${1%.*}`
+hypseus "$GAMENAME" vldp -framefile /userdata/roms/daphne/framefile/"$GAMENAME".txt -homedir /userdata/roms/daphne -fastboot -fullscreen
+
+

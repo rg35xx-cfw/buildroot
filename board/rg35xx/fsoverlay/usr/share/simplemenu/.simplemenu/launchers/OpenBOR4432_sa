@@ -3,4 +3,11 @@
 export HOME=/userdata/system
 cd $HOME
 
+cp /usr/share/evmapy/simplemenu.keys /var/run/evmapy/event1.json
+
+evmapy &
+
 OpenBOR4432 "$1"
+
+killall evmapy
+

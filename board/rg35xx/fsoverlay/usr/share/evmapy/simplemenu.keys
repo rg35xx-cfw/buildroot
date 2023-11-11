@@ -1,14 +1,14 @@
 {
     "actions": [
-        {                          
-            "trigger": "BTN_A",    
-            "type": "key",         
-            "target": "KEY_A"      
-        },                         
-        {                          
-            "trigger": "BTN_B",    
-            "type": "key",         
-            "target": "KEY_B"      
+        {
+            "trigger": "BTN_A",
+            "type": "key",
+            "target": "KEY_A"
+        },
+        {
+            "trigger": "BTN_B",
+            "type": "key",
+            "target": "KEY_B"
         },
         {
             "trigger": "BTN_X",
@@ -19,7 +19,7 @@
             "trigger": "BTN_Y",
             "type": "key",
             "target": "KEY_Y"
-        },  
+        },
         {
             "trigger": "BTN_SELECT",
             "type": "key",
@@ -30,36 +30,36 @@
             "type": "key",
             "target": "KEY_ENTER"
         },
-        {                           
+        {
             "trigger": "BTN_TL",
-            "type": "key",         
-            "target": "KEY_Q"  
-        },                         
-        {                          
-            "trigger": "BTN_TR",
-            "type": "key",       
-            "target": "KEY_R"
-        }, 
-        {                        
-            "trigger": "ABS_HAT0X:max",
-            "type": "key",  
-            "target": "KEY_RIGHT"    
-        },                       
-        {                        
-            "trigger": "ABS_HAT0X:min",
             "type": "key",
-            "target": "KEY_LEFT"    
+            "target": "KEY_Q"
         },
-        {                       
-            "trigger": "ABS_HAT0Y:max",
-            "type": "key",             
-            "target": "KEY_DOWN"      
-        },                             
-        {                              
-            "trigger": "ABS_HAT0Y:min",
-            "type": "key",             
-            "target": "KEY_UP"       
-        }     
+        {
+            "trigger": "BTN_TR",
+            "type": "key",
+            "target": "KEY_R"
+        },
+        {
+            "trigger": "BTN_DPAD_RIGHT",
+            "type": "key",
+            "target": "KEY_RIGHT"
+        },
+        {
+            "trigger": "BTN_DPAD_LEFT",
+            "type": "key",
+            "target": "KEY_LEFT"
+        },
+        {
+            "trigger": "BTN_DPAD_DOWN",
+            "type": "key",
+            "target": "KEY_DOWN"
+        },
+        {
+            "trigger": "BTN_DPAD_UP",
+            "type": "key",
+            "target": "KEY_UP"
+        }
     ],
     "grab": false,
     "axes": [
@@ -98,18 +98,6 @@
             "code": 5,
             "min": 0,
             "max": 255
-        },
-        {
-            "name": "ABS_HAT0X",
-            "code": 16,
-            "min": -1,
-            "max": 1
-        },
-        {
-            "name": "ABS_HAT0Y",
-            "code": 17,
-            "min": -1,
-            "max": 1
         }
     ],
     "buttons": [
@@ -128,10 +116,6 @@
         {
             "name": "BTN_Y",
             "code": 308
-        },
-        {
-            "name": "BTN_Z",
-            "code": 309
         },
         {
             "name": "BTN_TL",
@@ -160,6 +144,22 @@
         {
             "name": "BTN_THUMBR",
             "code": 318
+        },
+        {
+            "name": "BTN_DPAD_UP",
+            "code": 544
+        },
+        {
+            "name": "BTN_DPAD_DOWN",
+            "code": 545
+        },
+        {
+            "name": "BTN_DPAD_LEFT",
+            "code": 546
+        },
+        {
+            "name": "BTN_DPAD_RIGHT",
+            "code": 547
         }
     ]
 }

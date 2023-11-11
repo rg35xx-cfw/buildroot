@@ -92,7 +92,7 @@ function textoutput()
         13) 
            echo "Step $i: Converting partition to FAT32" >> "$log"
            textoutput $i 70 "echo 'switch partition with fdisk'"
-	   echo -e "t\n2\n0c\nw\n" | fdisk ${DISK};;
+	   echo -e "t\n3\n0c\nw\n" | fdisk ${DISK};;
         15) 
            echo "Step $i: Formatting partition as FAT32" >> "$log"
            textoutput $i 70 "mkfs.vfat ${PART}"

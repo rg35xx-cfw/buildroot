@@ -7,7 +7,7 @@ fi
 
 cd /userdata/system/configs/drastic
 
-killall evmapy
+export SDL_GAMECONTROLLERCONFIG=$(grep "RG35XX" "${HOME}/.config/gamecontrollerdb.txt")
+
 drastic
-evmapy &
 

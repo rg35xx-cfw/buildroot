@@ -79,3 +79,26 @@ if [ $1 = REMOVE_LUN ];then
 		echo  > $usb_gandroid0_lun1
 	fi
 fi
+
+if [ $1 = RNDIS ]; then
+	killall -9 adbd
+        echo "Anbernic" > $usb_gandroid0_iManufacturer
+        echo "RG35XX" > $usb_gandroid0_iProduct
+        echo '0' > $usb_gandroid0_enable
+        echo "10d6" > $usb_gandroid0_idVendor
+	echo "0c02" > $usb_gandroid0_idProduct
+	echo "rndis" > $usb_gandroid0_functions
+	echo 1 > /sys/class/android_usb/android0/f_rndis/wceis
+	
+	# Create dir for dnsmasq
+	mkdir -p /var/lib/misc
+	dnsmasq
+	dropbear -R
+	echo '1' > $usb_gandroid0_enable
+	(
+		sleep 2
+		ip addr add 172.16.0.1/24 dev rndis0
+		ip link set rndis0 up
+	) &
+fi
+
