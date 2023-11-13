@@ -1,10 +1,16 @@
 #!/bin/sh
 
 if [ ! -d /userdata/system/configs/drastic ];then
-	mkdir -p /userdata/system/configs/drastic
-	cp -r /usr/share/drastic/* /userdata/system/configs/drastic/
+        mkdir -p /userdata/system/configs/drastic
+        cp -r /usr/share/drastic/* /userdata/system/configs/drastic/
 fi
+
+cp /usr/share/evmapy/drastic.keys /var/run/evmapy/event1.json
+
+evmapy &
 
 cd /userdata/system/configs/drastic
 drastic "$1"
+
+killall evmapy
 
