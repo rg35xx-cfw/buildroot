@@ -4,7 +4,7 @@
 #
 ################################################################################
 # batocera - update
-SDL2_VERSION = 2.28.4
+SDL2_VERSION = 2.30.0
 SDL2_SOURCE = SDL2-$(SDL2_VERSION).tar.gz
 SDL2_SITE = http://www.libsdl.org/release
 SDL2_LICENSE = Zlib
@@ -230,6 +230,11 @@ SDL2_DEPENDENCIES += wayland waylandpp wayland-protocols libxkbcommon
 SDL2_CONF_OPTS += --enable-video-wayland
 else
 SDL2_CONF_OPTS += --disable-video-wayland
+endif
+
+# batocera - libdecor
+ifeq ($(BR2_PACKAGE_LIBDECOR),y)
+SDL2_DEPENDENCIES += libdecor
 endif
 
 # batocera - enable/disable Vulkan support

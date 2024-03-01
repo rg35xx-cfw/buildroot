@@ -4,8 +4,8 @@
 #
 ################################################################################
 # batocera (update)
-SWAY_VERSION = 1.8.1
-SWAY_SITE = $(call github,swaywm,sway,$(SWAY_VERSION))
+SWAY_VERSION = 1.9
+SWAY_SITE = https://github.com/swaywm/sway/releases/download/$(SWAY_VERSION)
 SWAY_LICENSE = MIT
 SWAY_LICENSE_FILES = LICENSE
 SWAY_DEPENDENCIES = host-pkgconf wlroots json-c pcre2 cairo pango
@@ -13,7 +13,7 @@ SWAY_CONF_OPTS = \
 	-Dwerror=false \
 	-Ddefault-wallpaper=false \
 	-Dzsh-completions=false \
-	-Dbash-completions=false \
+	-Dbash-completions=true \
 	-Dfish-completions=false \
 	-Dswaybar=false \
 	-Dswaynag=false \

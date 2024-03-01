@@ -6,7 +6,14 @@
 # batocera (update)
 # When updating the version, please also update mesa3d-headers
 # also update glslang to the latest stable version
-MESA3D_VERSION = 23.3.0-rc5
+
+# RPi4 workaround until - https://gitlab.freedesktop.org/mesa/mesa/-/issues/10306 fixed
+ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_BCM2711),y)
+    MESA3D_VERSION = 23.2.1
+else
+    MESA3D_VERSION = 24.0.1
+endif
+
 MESA3D_SOURCE = mesa-$(MESA3D_VERSION).tar.xz
 MESA3D_SITE = https://archive.mesa3d.org
 MESA3D_LICENSE = MIT, SGI, Khronos
@@ -143,6 +150,9 @@ MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_H264DEC)       += h264dec
 MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_H264ENC)       += h264enc
 MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_H265DEC)       += h265dec
 MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_H265ENC)       += h265enc
+MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_AV1DEC)        += av1dec
+MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_AV1ENC)        += av1enc
+MESA3D_VIDEO_CODECS-$(BR2_PACKAGE_MESA3D_VIDEO_CODEC_VP9DEC)        += vp9dec
 
 # batocera
 # Vulkan Layers - helps with multi-GPU switching
