@@ -282,9 +282,14 @@ FFMPEG_CONF_OPTS += --disable-vdpau
 endif
 
 ifeq ($(BR2_PACKAGE_RPI_USERLAND),y)
-FFMPEG_CONF_OPTS += --enable-mmal --enable-omx --enable-omx-rpi \
+FFMPEG_CONF_OPTS += --enable-omx --enable-omx-rpi \
 	--extra-cflags=-I$(STAGING_DIR)/usr/include/IL
 FFMPEG_DEPENDENCIES += rpi-userland
+ifeq ($(BR2_arm),y)
+FFMPEG_CONF_OPTS += --enable-mmal
+else
+FFMPEG_CONF_OPTS += --disable-mmal
+endif
 else
 FFMPEG_CONF_OPTS += --disable-mmal --disable-omx --disable-omx-rpi
 endif
@@ -521,14 +526,6 @@ else
 FFMPEG_CONF_OPTS += --disable-altivec
 endif
 
-#batocera rk3588 hwdec
-ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RK3588)$(BR2_PACKAGE_ROCKCHIP_MPP)$(BR2_PACKAGE_ROCKCHIP_RGA),yyy)
-FFMPEG_CONF_OPTS += --enable-rkmpp
-FFMPEG_CONF_OPTS += --enable-version3
-FFMPEG_CONF_OPTS += --enable-librga
-FFMPEG_DEPENDENCIES += rockchip-mpp rockchip-rga
-endif
-
 # Uses __atomic_fetch_add_4
 ifeq ($(BR2_TOOLCHAIN_HAS_LIBATOMIC),y)
 FFMPEG_CONF_OPTS += --extra-libs=-latomic
@@ -557,15 +554,12 @@ FFMPEG_CONF_OPTS += --disable-optimizations
 FFMPEG_CFLAGS += -O0
 endif
 
+ifeq ($(BR2_ARM_INSTRUCTIONS_THUMB),y)
+FFMPEG_CFLAGS += -marm
+endif
+
 FFMPEG_CONF_ENV += CFLAGS="$(FFMPEG_CFLAGS)"
 FFMPEG_CONF_OPTS += $(call qstrip,$(BR2_PACKAGE_FFMPEG_EXTRACONF))
-
-define FFMPEG_APPLY_LOCAL_PATCHES
-	if [ -d $(@D)/$(FFMPEG_VERSION) ]; then \
-		$(APPLY_PATCHES) $(@D) $(@D)/$(FFMPEG_VERSION) *.patch; \
-	fi
-endef
-FFMPEG_POST_PATCH_HOOKS += FFMPEG_APPLY_LOCAL_PATCHES
 
 # Override FFMPEG_CONFIGURE_CMDS: FFmpeg does not support --target and others
 define FFMPEG_CONFIGURE_CMDS

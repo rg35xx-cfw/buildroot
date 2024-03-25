@@ -7,6 +7,10 @@
 QT6BASE_VERSION = $(QT6_VERSION)
 QT6BASE_SITE = $(QT6_SITE)
 QT6BASE_SOURCE = qtbase-$(QT6_SOURCE_TARBALL_PREFIX)-$(QT6BASE_VERSION).tar.xz
+QT6BASE_CPE_ID_VENDOR = qt
+QT6BASE_CPE_ID_PRODUCT = qt
+
+QT6BASE_CMAKE_BACKEND = ninja
 
 QT6BASE_LICENSE = \
 	GPL-2.0+ or LGPL-3.0, \
@@ -29,7 +33,6 @@ QT6BASE_LICENSE_FILES = \
 	LICENSES/Qt-GPL-exception-1.0.txt
 
 QT6BASE_DEPENDENCIES = \
-	host-ninja \
 	host-qt6base \
 	double-conversion \
 	libb2 \
@@ -38,7 +41,6 @@ QT6BASE_DEPENDENCIES = \
 QT6BASE_INSTALL_STAGING = YES
 
 QT6BASE_CONF_OPTS = \
-	-GNinja \
 	-DQT_HOST_PATH=$(HOST_DIR) \
 	-DFEATURE_concurrent=OFF \
 	-DFEATURE_xml=OFF \
@@ -78,20 +80,7 @@ QT6BASE_CONF_OPTS += \
     -DQT_BUILD_TESTS_BY_DEFAULT=OFF \
     -DQT_BUILD_EXAMPLES_BY_DEFAULT=OFF
 
-define QT6BASE_BUILD_CMDS
-	$(TARGET_MAKE_ENV) $(BR2_CMAKE) --build $(QT6BASE_BUILDDIR)
-endef
-
-define QT6BASE_INSTALL_STAGING_CMDS
-	$(TARGET_MAKE_ENV) DESTDIR=$(STAGING_DIR) $(BR2_CMAKE) --install $(QT6BASE_BUILDDIR)
-endef
-
-define QT6BASE_INSTALL_TARGET_CMDS
-	$(TARGET_MAKE_ENV) DESTDIR=$(TARGET_DIR) $(BR2_CMAKE) --install $(QT6BASE_BUILDDIR)
-endef
-
 HOST_QT6BASE_DEPENDENCIES = \
-	host-ninja \
 	host-double-conversion \
 	host-libb2 \
 	host-pcre2 \
@@ -158,20 +147,26 @@ QT6BASE_CONF_OPTS += \
 	-DFEATURE_vulkan=OFF
 QT6BASE_DEPENDENCIES += freetype
 
+ifeq ($(BR2_PACKAGE_QT6BASE_VULKAN),y)
+QT6BASE_DEPENDENCIES   += vulkan-headers vulkan-loader
+QT6BASE_CONFIGURE_OPTS += -DFEATURE_vulkan=ON
+else
+QT6BASE_CONFIGURE_OPTS += -DFEATURE_vulkan=OFF
+endif
+
 ifeq ($(BR2_PACKAGE_QT6BASE_LINUXFB),y)
 QT6BASE_CONF_OPTS += -DFEATURE_linuxfb=ON
 else
 QT6BASE_CONF_OPTS += -DFEATURE_linuxfb=OFF
 endif
 
-# batocera - add xinput
 ifeq ($(BR2_PACKAGE_QT6BASE_XCB),y)
 QT6BASE_CONF_OPTS += \
-    -DFEATURE_xcb=ON \
+	-DFEATURE_xcb=ON \
 	-DFEATURE_xcb_xlib=ON \
 	-DFEATURE_xkbcommon=ON \
 	-DFEATURE_xkbcommon_x11=ON \
-	-DFEATURE_system_xcb_xinput=ON
+	-DFEATURE_system_xcb_xinput=ON # batocera
 # batocera - add cursor
 QT6BASE_DEPENDENCIES += \
 	libxcb \
@@ -184,7 +179,7 @@ QT6BASE_DEPENDENCIES += \
 	xlib_libX11
 else
 QT6BASE_CONF_OPTS += -DFEATURE_xcb=OFF
-endif 
+endif
 
 ifeq ($(BR2_PACKAGE_QT6BASE_HARFBUZZ),y)
 QT6BASE_CONF_OPTS += -DFEATURE_harfbuzz=ON
@@ -344,7 +339,7 @@ QT6BASE_CONF_OPTS += -DFEATURE_sql_db2=OFF -DFEATURE_sql_ibase=OFF -DFEATURE_sql
 
 ifeq ($(BR2_PACKAGE_QT6BASE_MYSQL),y)
 QT6BASE_CONF_OPTS += -DFEATURE_sql_mysql=ON
-QT6BASE_DEPENDENCIES += mysql
+QT6BASE_DEPENDENCIES += mariadb
 else
 QT6BASE_CONF_OPTS += -DFEATURE_sql_mysql=OFF
 endif
@@ -398,6 +393,11 @@ QT6BASE_DEPENDENCIES += zstd
 else
 QT6BASE_CONF_OPTS += -DFEATURE_zstd=OFF
 endif
+
+define QT6BASE_RM_USR_MKSPECS
+	$(Q)rm -rf $(TARGET_DIR)/usr/mkspecs
+endef
+QT6BASE_TARGET_FINALIZE_HOOKS += QT6BASE_RM_USR_MKSPECS
 
 $(eval $(cmake-package))
 $(eval $(host-cmake-package))

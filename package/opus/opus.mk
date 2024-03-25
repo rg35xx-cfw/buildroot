@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-OPUS_VERSION = 1.3.1
+OPUS_VERSION = 1.4
 OPUS_SITE = https://downloads.xiph.org/releases/opus
 OPUS_LICENSE = BSD-3-Clause
 OPUS_LICENSE_FILES = COPYING
+OPUS_CPE_ID_VENDOR = opus-codec
 OPUS_INSTALL_STAGING = YES
 
 OPUS_CFLAGS = $(TARGET_CFLAGS)
@@ -40,7 +41,7 @@ ifeq ($(BR2_arm)$(BR2_armeb):$(BR2_ARM_CPU_HAS_ARM),y:)
 OPUS_CONF_OPTS += --disable-asm
 endif
 
-#batocera workaround rk3288 test programs build failure
+# batocera workaround rk3288 test programs build failure
 ifeq ($(BR2_cortex_a17),y)
 OPUS_CONF_OPTS += --disable-extra-programs
 endif

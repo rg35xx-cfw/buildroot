@@ -23,14 +23,13 @@ RPM_LICENSE_FILES = COPYING
 RPM_CPE_ID_VENDOR = rpm
 RPM_SELINUX_MODULES = rpm
 
-#batocera
+# batocera
 RPM_INSTALL_STAGING = YES
 
 # Don't set --{dis,en}-openmp as upstream wants to abort the build if
 # --enable-openmp is provided and OpenMP is < 4.5:
 # https://github.com/rpm-software-management/rpm/pull/1433
 RPM_CONF_OPTS = \
-	--disable-python \
 	--disable-rpath \
 	--with-gnu-ld \
 	--without-fapolicyd \

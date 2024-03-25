@@ -3,8 +3,8 @@
 # rtl8821cu
 #
 ################################################################################
-# batocera - version bump for linux 6.7+
-RTL8821CU_VERSION = eb52ece92607394ecc22e96b41671ec3e5b1fa30
+
+RTL8821CU_VERSION = 5b39398e2de146edeb76716420f3288f508bea61
 RTL8821CU_SITE = $(call github,morrownr,8821cu-20210916,$(RTL8821CU_VERSION))
 RTL8821CU_LICENSE = GPL-2.0
 RTL8821CU_LICENSE_FILES = LICENSE
@@ -28,6 +28,12 @@ RTL8821CU_MODULE_MAKE_OPTS = \
 	CONFIG_RTL8821CU=m \
 	KVER=$(LINUX_VERSION_PROBED) \
 	USER_EXTRA_CFLAGS="$(RTL8821CU_USER_EXTRA_CFLAGS)"
+
+define RTL8821CU_INSTALL_MODPROBE_CONF
+	$(INSTALL) -m 0644 -D $(@D)/8821cu.conf \
+		$(TARGET_DIR)/etc/modprobe.d/8821cu.conf
+endef
+RTL8821CU_POST_INSTALL_TARGET_HOOKS += RTL8821CU_INSTALL_MODPROBE_CONF
 
 $(eval $(kernel-module))
 $(eval $(generic-package))

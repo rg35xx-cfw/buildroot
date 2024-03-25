@@ -3,15 +3,15 @@
 # mesa3d
 #
 ################################################################################
-# batocera (update)
+# batocera (update) - patch 5 not needed
 # When updating the version, please also update mesa3d-headers
 # also update glslang to the latest stable version
 
-# RPi4 workaround until - https://gitlab.freedesktop.org/mesa/mesa/-/issues/10306 fixed
-ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_BCM2711),y)
+# RPi4/Panfrost workaround until - https://gitlab.freedesktop.org/mesa/mesa/-/issues/10306 fixed
+ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_BCM2711)$(BR2_PACKAGE_BATOCERA_PANFROST_MESA3D),y)
     MESA3D_VERSION = 23.2.1
 else
-    MESA3D_VERSION = 24.0.1
+    MESA3D_VERSION = 24.0.3
 endif
 
 MESA3D_SOURCE = mesa-$(MESA3D_VERSION).tar.xz
@@ -42,17 +42,9 @@ MESA3D_CONF_OPTS = \
 	-Dgallium-omx=disabled \
 	-Dpower8=disabled
 
-# Codesourcery ARM 2014.05 fail to link libmesa_dri_drivers.so with --as-needed linker
-# flag due to a linker bug between binutils 2.24 and 2.25 (2.24.51.20140217).
-ifeq ($(BR2_TOOLCHAIN_EXTERNAL_CODESOURCERY_ARM),y)
-MESA3D_CONF_OPTS += -Db_asneeded=false
-endif
-
-ifeq ($(BR2_PACKAGE_MESA3D_DRI3),y)
+ifeq ($(BR2_PACKAGE_MESA3D_DRIVER)$(BR2_PACKAGE_XORG7),yy)
 MESA3D_CONF_OPTS += -Ddri3=enabled
-ifeq ($(BR2_PACKAGE_XLIB_LIBXSHMFENCE),y)
 MESA3D_DEPENDENCIES += xlib_libxshmfence
-endif
 else
 MESA3D_CONF_OPTS += -Ddri3=disabled
 endif
@@ -337,7 +329,7 @@ endif
 ifeq ($(BR2_x86_i686),y)
     MESA3D_PRE_CONFIGURE_HOOKS += MESA3D_VULKANJSON_X86
 endif
-# end batcoera
+# end batocera
 
 MESA3D_CFLAGS = $(TARGET_CFLAGS)
 

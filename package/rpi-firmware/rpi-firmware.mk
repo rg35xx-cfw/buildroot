@@ -3,8 +3,8 @@
 # rpi-firmware
 #
 ################################################################################
-# batocera (update) - Aligns to kernel version: 6.1.73
-RPI_FIRMWARE_VERSION = d4a1760a76873c467e99a5a27f98815e65fb9a55
+# batocera (update) - Aligns to kernel version: 6.6.20
+RPI_FIRMWARE_VERSION = d3a4d28429c224d260aa9592b517d3ecd09e5538
 RPI_FIRMWARE_SITE = $(call github,raspberrypi,firmware,$(RPI_FIRMWARE_VERSION))
 RPI_FIRMWARE_LICENSE = BSD-3-Clause
 RPI_FIRMWARE_LICENSE_FILES = boot/LICENCE.broadcom
@@ -58,12 +58,6 @@ define RPI_FIRMWARE_INSTALL_DTB_OVERLAYS
 	)
 	$(INSTALL) -D -m 0644 $(@D)/boot/overlays/overlay_map.dtb $(BINARIES_DIR)/rpi-firmware/overlays/
 	touch $(BINARIES_DIR)/rpi-firmware/overlays/README
-endef
-else
-# Still create the directory, so a genimage.cfg can include it independently of
-# whether _INSTALL_DTB_OVERLAYS is selected or not.
-define RPI_FIRMWARE_INSTALL_DTB_OVERLAYS
-	$(INSTALL) -d $(BINARIES_DIR)/rpi-firmware/overlays
 endef
 endif
 
